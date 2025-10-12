@@ -92,12 +92,6 @@ export default function Contact() {
               ) : (
                 <div className="bg-sakura-bg rounded-2xl p-10 border border-sakura-border">
                   <h3 className="text-3xl font-bold text-sakura-ink mb-8">Send us a message</h3>
-                  
-                  {error && (
-                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-                      {error}
-                    </div>
-                  )}
 
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
