@@ -1,52 +1,66 @@
-import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
-import { getBlogPostBySlug, type BlogPost } from '../lib/api';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  category: string;
+  featured_image_url?: string;
+  published_at: string;
+}
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    if (slug) {
-      loadPost(slug);
+  // Static blog posts data (same as in Blog.tsx)
+  const posts: BlogPost[] = [
+    {
+      id: '1',
+      title: '10 Web Design Trends to Watch in 2025',
+      slug: '10-web-design-trends-2025',
+      excerpt: 'Discover the latest design trends that will shape the future of web development and user experience.',
+      content: 'Web design is constantly evolving, and 2025 promises to bring exciting new trends. From AI-powered design tools to immersive 3D experiences, the future of web design is here. In this comprehensive guide, we explore the top trends that will define the digital landscape in 2025.\n\n1. AI-Assisted Design\n2. Immersive 3D Experiences\n3. Minimalist Interfaces\n4. Dark Mode as Standard\n5. Micro-interactions\n\nEach trend brings unique opportunities for creating engaging user experiences.',
+      author: 'Sarah Johnson',
+      category: 'web-design',
+      featured_image_url: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop',
+      published_at: '2024-12-15'
+    },
+    {
+      id: '2',
+      title: 'The Complete Guide to SEO in 2025',
+      slug: 'complete-guide-seo-2025',
+      excerpt: 'Learn how to optimize your website for search engines and increase your organic traffic.',
+      content: 'Search Engine Optimization has become more sophisticated than ever. This guide covers everything you need to know about SEO in 2025, from technical optimization to content strategy.\n\nKey topics covered:\n- Technical SEO fundamentals\n- Content optimization strategies\n- Link building best practices\n- Local SEO techniques\n- Mobile-first indexing\n\nImplementing these strategies will help your website rank higher and attract more organic traffic.',
+      author: 'Michael Chen',
+      category: 'seo',
+      featured_image_url: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&h=600&fit=crop',
+      published_at: '2024-12-10'
+    },
+    {
+      id: '3',
+      title: 'Building Scalable React Applications',
+      slug: 'building-scalable-react-applications',
+      excerpt: 'Best practices and patterns for creating maintainable and scalable React applications.',
+      content: 'Building applications that can grow and scale is crucial for long-term success. This guide explores proven patterns and best practices for creating React applications that are easy to maintain and scale.\n\nTopics include:\n- Component architecture\n- State management strategies\n- Code splitting and lazy loading\n- Performance optimization\n- Testing strategies\n\nFollow these principles to build robust, scalable applications.',
+      author: 'Emily Rodriguez',
+      category: 'development',
+      featured_image_url: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=600&fit=crop',
+      published_at: '2024-12-05'
     }
-  }, [slug]);
+  ];
 
-  async function loadPost(slug: string) {
-    try {
-      const data = await getBlogPostBySlug(slug);
-      setPost(data);
-      if (!data) {
-        setError(true);
-      }
-    } catch (err) {
-      console.error('Error loading blog post:', err);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const post = posts.find(p => p.slug === slug);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block w-12 h-12 border-4 border-sakura-border border-t-sakura-brand rounded-full animate-spin"></div>
-          <p className="text-sakura-muted mt-4">Loading post...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !post) {
+  if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="text-center max-w-md">
