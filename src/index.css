@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gradient-to-b from-sakura-bg to-white text-sakura-ink;
+  }
+}
+
+@layer utilities {
+  /* Float Animation */
+  .float-animation {
+    animation: floatUp 6s ease-in-out infinite;
+  }
+
+  @keyframes floatUp {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* Removed constant pulsing - too distracting */
+  .pulse-glow {
+    /* Removed animation */
+  }
+
+  /* Slide In Animations */
+  .slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .slide-in-up {
+    animation: slideInUp 0.6s ease-out;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade In Animation */
+  .fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Scale In Animation */
+  .scale-in {
+    animation: scaleIn 0.5s ease-out;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Remove overly perfect shine effect */
+  .feature-shine {
+    /* Simplified - no shine overlay */
+  }
+
+  /* Natural Header & Cards */
+  .glass-header {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .glass-card {
+    background: #ffffff;
+  }
+
+  /* Simplified Text Styling - More Human */
+  .gradient-text {
+    color: #ff4d88;
+  }
+
+  /* Subtle Hover Effect */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply px-8 py-4 bg-sakura-brand text-white rounded-button font-bold shadow-brand hover:scale-105 active:scale-95 transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 bg-white border-2 border-sakura-border rounded-button font-bold hover:shadow-card hover:border-sakura-brand transition-all duration-200;
+  }
+
+  /* Subtle Card Hover */
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-card;
+  }
+
+  /* Animated Underline */
+  .animated-underline {
+    position: relative;
+  }
+
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #ff4d88;
+    transition: width 0.3s ease;
+  }
+
+  .animated-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Gradient Backgrounds */
+  .gradient-bg-1 {
+    background: linear-gradient(135deg, #fff0f4 0%, #ffffff 100%);
+  }
+
+  .gradient-bg-2 {
+    background: linear-gradient(135deg, #ffd6e7 0%, #fff0f4 50%, #ffffff 100%);
+  }
+
+  /* Ripple Effect */
+  .ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .ripple:active::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Skeleton Loader */
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Smooth Scroll Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fff0f4;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #ff4d88;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e63d75;
+  }
+
+  /* Professional Icon Styles */
+  .icon-container {
+    @apply flex items-center justify-center rounded-xl transition-all duration-300;
+  }
+
+  .icon-container-sm {
+    @apply w-10 h-10 text-base;
+  }
+
+  .icon-container-md {
+    @apply w-14 h-14 text-xl;
+  }
+
+  .icon-container-lg {
+    @apply w-16 h-16 text-2xl;
+  }
+
+  .icon-container-xl {
+    @apply w-20 h-20 text-3xl;
+  }
+
+  .icon-primary {
+    @apply bg-sakura-brand text-white shadow-sm;
+  }
+
+  .icon-secondary {
+    @apply bg-sakura-brand-light text-sakura-brand;
+  }
+
+  .icon-tertiary {
+    @apply bg-white border border-sakura-border text-sakura-brand;
+  }
+
+  /* Subtle Icon Hover Effects */
+  .icon-hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .icon-hover-rotate:hover {
+    transform: rotate(5deg);
+  }
+
+  .icon-hover-spin:hover {
+    /* Removed spinning - too much */
+  }
+
+  .icon-hover-bounce:hover {
+    /* Simplified */
+    transform: translateY(-2px);
+  }
+
+  .icon-hover-pulse:hover {
+    transform: scale(1.05);
+  }
+
+  /* Floating Icon Animation */
+  .icon-float {
+    animation: iconFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes iconFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* Simplified Icon Shadow */
+  .icon-glow {
+    /* Less glow, more natural */
+  }
+
+  /* Outlined Icon Style */
+  .icon-outlined {
+    @apply border-2 border-sakura-brand text-sakura-brand bg-transparent;
+  }
+
+  .icon-outlined:hover {
+    @apply bg-sakura-brand text-white border-sakura-brand;
+  }
+}
