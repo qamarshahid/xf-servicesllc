@@ -22,7 +22,7 @@ export default function Header() {
     { path: '/about', label: 'About' },
     { path: '/services', label: 'Services' },
     { path: '/blog', label: 'Blog' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/privacy', label: 'Privacy Policy' },
   ];
 
   return (
