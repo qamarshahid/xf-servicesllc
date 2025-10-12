@@ -1,26 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MapPin, Briefcase, ChevronDown, ChevronUp, Users, Heart, Zap, ArrowRight, Clock } from 'lucide-react';
-import { getJobListings, type JobListing } from '../lib/api';
+
+interface JobListing {
+  id: string;
+  title: string;
+  department: string;
+  location: string;
+  job_type: string;
+  description: string;
+}
 
 export default function Careers() {
-  const [jobs, setJobs] = useState<JobListing[]>([]);
-  const [loading, setLoading] = useState(true);
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadJobs();
-  }, []);
-
-  async function loadJobs() {
-    try {
-      const data = await getJobListings();
-      setJobs(data);
-    } catch (error) {
-      console.error('Error loading job listings:', error);
-    } finally {
-      setLoading(false);
+  // Static job listings data
+  const jobs: JobListing[] = [
+    {
+      id: '1',
+      title: 'Senior Full-Stack Developer',
+      department: 'Engineering',
+      location: 'Remote',
+      job_type: 'Full-time',
+      description: 'We\'re looking for an experienced full-stack developer to join our team. You\'ll work on cutting-edge projects using React, Node.js, and modern web technologies.'
+    },
+    {
+      id: '2',
+      title: 'UI/UX Designer',
+      department: 'Design',
+      location: 'Remote',
+      job_type: 'Full-time',
+      description: 'Join our design team to create beautiful, user-friendly interfaces. You\'ll collaborate with developers and clients to bring digital experiences to life.'
+    },
+    {
+      id: '3',
+      title: 'Digital Marketing Specialist',
+      department: 'Marketing',
+      location: 'Hybrid',
+      job_type: 'Full-time',
+      description: 'Help our clients grow their online presence through strategic digital marketing campaigns, SEO optimization, and content creation.'
     }
-  }
+  ];
 
   const toggleJob = (id: string) => {
     setExpandedJob(expandedJob === id ? null : id);

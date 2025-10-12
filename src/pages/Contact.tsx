@@ -1,6 +1,5 @@
 import { useState, FormEvent } from 'react';
 import { Mail, Phone, MapPin, Clock, CheckCircle, Send } from 'lucide-react';
-import { submitContactForm } from '../lib/api';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,23 +11,20 @@ export default function Contact() {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
 
-    try {
-      await submitContactForm(formData);
+    // Simulate form submission
+    setTimeout(() => {
       setSuccess(true);
       setFormData({ name: '', email: '', phone: '', message: '', sms_consent: false });
-    } catch (err) {
-      setError('Failed to submit form. Please try again or email us directly.');
-      console.error(err);
-    } finally {
       setLoading(false);
-    }
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setSuccess(false), 5000);
+    }, 1000);
   };
 
   return (

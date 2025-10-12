@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star } from 'lucide-react';
-import { getTestimonials } from '../lib/api';
 
 interface Testimonial {
   id: number;
@@ -13,23 +12,33 @@ interface Testimonial {
 }
 
 const Home: React.FC = () => {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const data = await getTestimonials();
-        setTestimonials(data.slice(0, 3));
-      } catch (error) {
-        console.error('Error fetching testimonials:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-  }, []);
+  // Static testimonials data
+  const testimonials: Testimonial[] = [
+    {
+      id: 1,
+      quote: "XF Services transformed our online presence. Their attention to detail and creative solutions exceeded our expectations!",
+      client_name: "Sarah Johnson",
+      position: "CEO",
+      company_name: "TechStart Inc",
+      rating: 5
+    },
+    {
+      id: 2,
+      quote: "Professional, responsive, and truly understanding of our business needs. Highly recommended!",
+      client_name: "Michael Chen",
+      position: "Marketing Director",
+      company_name: "Global Solutions",
+      rating: 5
+    },
+    {
+      id: 3,
+      quote: "The team delivered a stunning website that perfectly represents our brand. Great communication throughout!",
+      client_name: "Emily Rodriguez",
+      position: "Founder",
+      company_name: "Creative Studios",
+      rating: 5
+    }
+  ];
 
   return (
     <div className="bg-white">
@@ -126,9 +135,8 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials Section - Only if we have data */}
-      {!loading && testimonials.length > 0 && (
-        <section className="py-24 px-4 bg-white">
+      {/* Testimonials Section */}
+      <section className="py-24 px-4 bg-white">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-sakura-ink leading-tight mb-8">
@@ -172,8 +180,7 @@ const Home: React.FC = () => {
               ))}
             </div>
           </div>
-        </section>
-      )}
+      </section>
 
       {/* CTA Section - Matching Other Pages */}
       <section className="py-24 px-4 bg-white">

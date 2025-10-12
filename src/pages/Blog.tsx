@@ -1,27 +1,54 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, User, ArrowRight, Clock } from 'lucide-react';
-import { getBlogPosts, type BlogPost } from '../lib/api';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  author: string;
+  category: string;
+  featured_image_url?: string;
+  published_at: string;
+}
 
 export default function Blog() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  useEffect(() => {
-    loadPosts();
-  }, []);
-
-  async function loadPosts() {
-    try {
-      const data = await getBlogPosts();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error loading blog posts:', error);
-    } finally {
-      setLoading(false);
+  // Static blog posts data
+  const posts: BlogPost[] = [
+    {
+      id: '1',
+      title: '10 Web Design Trends to Watch in 2025',
+      slug: '10-web-design-trends-2025',
+      excerpt: 'Discover the latest design trends that will shape the future of web development and user experience.',
+      author: 'Sarah Johnson',
+      category: 'web-design',
+      featured_image_url: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop',
+      published_at: '2024-12-15'
+    },
+    {
+      id: '2',
+      title: 'The Complete Guide to SEO in 2025',
+      slug: 'complete-guide-seo-2025',
+      excerpt: 'Learn how to optimize your website for search engines and increase your organic traffic.',
+      author: 'Michael Chen',
+      category: 'seo',
+      featured_image_url: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&h=600&fit=crop',
+      published_at: '2024-12-10'
+    },
+    {
+      id: '3',
+      title: 'Building Scalable React Applications',
+      slug: 'building-scalable-react-applications',
+      excerpt: 'Best practices and patterns for creating maintainable and scalable React applications.',
+      author: 'Emily Rodriguez',
+      category: 'development',
+      featured_image_url: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=600&fit=crop',
+      published_at: '2024-12-05'
     }
-  }
+  ];
 
   const categories = [
     { id: 'all', label: 'All Posts' },
@@ -34,28 +61,6 @@ export default function Blog() {
   const filteredPosts = selectedCategory === 'all'
     ? posts
     : posts.filter(post => post.category === selectedCategory);
-
-  if (loading) {
-    return (
-      <div className="py-24 px-4 bg-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="animate-pulse">
-            <div className="h-12 bg-sakura-border rounded w-96 mx-auto mb-8"></div>
-            <div className="h-6 bg-sakura-border rounded w-64 mx-auto mb-16"></div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="bg-sakura-bg rounded-2xl p-8">
-                  <div className="h-48 bg-sakura-border rounded-xl mb-6"></div>
-                  <div className="h-6 bg-sakura-border rounded mb-4"></div>
-                  <div className="h-4 bg-sakura-border rounded w-3/4"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div>
