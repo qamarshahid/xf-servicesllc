@@ -61,6 +61,9 @@ export default function Privacy() {
           <div className="bg-sakura-brand-light border-l-4 border-sakura-brand rounded-card p-6">
             <h2 className="text-2xl font-bold mb-4">SMS Communication and Consent</h2>
             <div className="space-y-3 text-sakura-muted leading-relaxed">
+              <p className="font-semibold text-sakura-brand">
+                <strong>Consent and Privacy:</strong> We obtain explicit mobile opt-in and SMS consent from users before sending any messages. We do not share or disclose phone numbers with third parties or affiliates for marketing purposes. Your phone number is used solely for the business communications described below and is processed through RingCentral in accordance with their privacy policy and applicable telecommunications regulations.
+              </p>
               <p>
                 <strong>Important:</strong> If you provide your phone number and consent to SMS communications
                 through our contact forms or other means, you authorize Xf Service LLC to send you text messages
